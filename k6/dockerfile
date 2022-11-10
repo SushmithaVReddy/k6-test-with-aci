@@ -1,0 +1,10 @@
+FROM loadimpact/k6
+
+WORKDIR /usr/src/k6-test
+
+COPY ./k6/tests/ .
+ENV EVENTHUB_ACCESS_TOKEN="<GENERATE TOKEN USING ./utils/create_auth_token.py>"
+ENV EVENTHUB_NAMESPACE="<eventHubNamespace>"
+ENV EVENTHUB_NAME="<evenhtHubNmae>"
+EXPOSE 8080
+ENTRYPOINT ["k6", "run", "script.js"]
